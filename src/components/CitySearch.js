@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
-export default function CitySearch() {
+export default function CitySearch({ inputLabel = "From" }) {
   const [options, setOptions] = useState([]);
   const previousController = useRef();
 
@@ -54,7 +54,7 @@ export default function CitySearch() {
         isOptionEqualToValue={(option, value) => option.title === value.title}
         style={{ width: 300 }}
         renderInput={(params) => (
-          <TextField {...params} label="From" variant="outlined" />
+          <TextField {...params} label={inputLabel} variant="outlined" />
         )}
       />
     </div>

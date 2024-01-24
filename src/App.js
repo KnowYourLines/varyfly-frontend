@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import ProTip from './ProTip';
-import CitySearch from './components/CitySearch';
+import FlightLeg from './components/FlightLeg';
 
 function Copyright() {
   return (
@@ -23,12 +23,8 @@ export default function App() {
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-          Material UI Create React App example
-        </Typography>
-        <ProTip />
-        <CitySearch />
-        <Copyright />
+        <FlightLeg />
+        <FlightLeg />
       </Box>
     </Container>
   );
