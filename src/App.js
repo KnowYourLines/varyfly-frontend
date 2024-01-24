@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import ProTip from './ProTip';
+import CitySearch from './components/CitySearch';
 
 function Copyright() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
           Material UI Create React App example
         </Typography>
         <ProTip />
+        <CitySearch />
         <Copyright />
       </Box>
     </Container>
