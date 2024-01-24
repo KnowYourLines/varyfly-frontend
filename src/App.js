@@ -7,7 +7,10 @@ import Grid from "@mui/material/Unstable_Grid2";
 import FlightLeg from "./components/FlightLeg";
 
 export default function App() {
-  const [flightLegs, setFlightLegs] = useState([]);
+  const [flightLegs, setFlightLegs] = useState([
+    { from: null, to: null, id: 1 },
+    { from: null, to: null, id: 2 },
+  ]);
   const onClick = () => {
     setFlightLegs([
       ...flightLegs,
