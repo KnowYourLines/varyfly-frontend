@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
-export default function CitySearch({ inputLabel = "From" }) {
+export default function CitySearch({ inputLabel = "From", handleChange }) {
   const [options, setOptions] = useState([]);
   const previousController = useRef();
 
@@ -47,9 +47,7 @@ export default function CitySearch({ inputLabel = "From" }) {
         id="combo-box-demo"
         options={options}
         onInputChange={onInputChange}
-        onChange={(event, newValue) => {
-          console.log(newValue);
-        }}
+        onChange={handleChange}
         getOptionLabel={(option) => `${option.title} at $${option.price}`}
         isOptionEqualToValue={(option, value) => option.title === value.title}
         style={{ width: 300 }}
