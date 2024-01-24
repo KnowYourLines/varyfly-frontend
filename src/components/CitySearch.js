@@ -50,7 +50,7 @@ export default function CitySearch({ inputLabel = "From" }) {
         onChange={(event, newValue) => {
           console.log(newValue);
         }}
-        getOptionLabel={(option) => option.title}
+        getOptionLabel={(option) => `${option.title} at $${option.price}`}
         isOptionEqualToValue={(option, value) => option.title === value.title}
         style={{ width: 300 }}
         renderInput={(params) => (
