@@ -42,19 +42,17 @@ export default function CitySearch({ inputLabel = "From", handleChange }) {
   };
 
   return (
-    <div>
-      <Autocomplete
-        id="combo-box-demo"
-        options={options}
-        onInputChange={onInputChange}
-        onChange={handleChange}
-        getOptionLabel={(option) => `${option.title} at $${option.price}`}
-        isOptionEqualToValue={(option, value) => option.title === value.title}
-        style={{ width: 300 }}
-        renderInput={(params) => (
-          <TextField {...params} label={inputLabel} variant="outlined" />
-        )}
-      />
-    </div>
+    <Autocomplete
+      id="combo-box-demo"
+      options={options}
+      onInputChange={onInputChange}
+      onChange={handleChange}
+      getOptionLabel={(option) => `${option.title} at $${option.price}`}
+      isOptionEqualToValue={(option, value) => option.title === value.title}
+      style={{ width: "100%" }}
+      renderInput={(params) => (
+        <TextField {...params} label={inputLabel} variant="outlined" />
+      )}
+    />
   );
 }

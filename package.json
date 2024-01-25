@@ -14,7 +14,8 @@
     "@mui/material": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-scripts": "latest"
+    "react-scripts": "latest",
+    "uuid": "^9.0.1"
   },
   "browserslist": {
     "production": [
