@@ -8,8 +8,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { v4 as uuidv4 } from "uuid";
 
 import FlightLeg from "./components/FlightLeg";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 export default function App() {
+  const maxNumFlightLegs = 16;
   const [flightLegs, setFlightLegs] = useState([
     { from: null, to: null, date: null, id: uuidv4() },
     { from: null, to: null, date: null, id: uuidv4() },
@@ -41,7 +43,7 @@ export default function App() {
         <Box sx={{ my: "1%" }}>
           <Grid container rowSpacing={2}>
             {flightLegs.map((flightLeg, index) => (
-              <Grid item xs={12} key={flightLeg.id}>
+              <Grid xs={12} key={flightLeg.id}>
                 <FlightLeg
                   flightLegId={flightLeg.id}
                   from={flightLeg.from}
@@ -53,11 +55,13 @@ export default function App() {
                 />
               </Grid>
             ))}
-            <Grid item xs={12}>
-              <Button variant="contained" onClick={addFlight}>
-                Add Flight
-              </Button>
-            </Grid>
+            {flightLegs.length < maxNumFlightLegs && (
+              <Grid xs={12}>
+                <Button variant="contained" onClick={addFlight}>
+                  Add Flight
+                </Button>
+              </Grid>
+            )}
           </Grid>
         </Box>
       </Container>
