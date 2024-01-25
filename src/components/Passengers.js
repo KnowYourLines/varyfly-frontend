@@ -22,11 +22,9 @@ export default function Passengers({
   cabinClass,
   changeCabinClass,
   numAdults,
-  numTeens,
   numChildren,
   numInfants,
   setNumAdults,
-  setNumTeens,
   setNumChildren,
   setNumInfants,
 }) {
@@ -37,9 +35,7 @@ export default function Passengers({
   return (
     <div>
       <Button variant="contained" onClick={handleOpen}>
-        {`Passengers (${
-          numAdults + numTeens + numChildren + numInfants
-        } total)`}
+        {`Passengers (${numAdults + numChildren + numInfants} total)`}
       </Button>
       <Modal
         open={open}
@@ -60,12 +56,7 @@ export default function Passengers({
                 count={numAdults}
                 setCount={setNumAdults}
                 minCount={1}
-                title={"Adults (age 18+)"}
-              />
-              <Counter
-                count={numTeens}
-                setCount={setNumTeens}
-                title={"Teens (age 12+)"}
+                title={"Adults (age 12+, with at least one age 18+)"}
               />
               <Counter
                 count={numChildren}
