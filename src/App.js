@@ -33,23 +33,23 @@ export default function App() {
   return (
     <Container maxWidth="100%">
       <Box sx={{ my: "1%" }}>
-      <Grid container rowSpacing={2}>
-        {flightLegs.map((flightLeg, index) => (
-          <Grid item xs={12} key={flightLeg.id}>
-            <FlightLeg
-              flightLegId={flightLeg.id}
-              from={flightLeg.from}
-              to={flightLeg.to}
-              flightLegOrder={index}
-              onChange={handleFlightLegChange}
-              onRemove={removeFlight}
-            />
+        <Grid container rowSpacing={2}>
+          {flightLegs.map((flightLeg, index) => (
+            <Grid item xs={12} key={flightLeg.id}>
+              <FlightLeg
+                flightLegId={flightLeg.id}
+                from={flightLeg.from}
+                to={flightLeg.to}
+                flightLegOrder={index}
+                onChange={handleFlightLegChange}
+                onRemove={removeFlight}
+              />
+            </Grid>
+          ))}
+          <Grid item xs={12}>
+            <Button onClick={addFlight}>Add Flight</Button>
           </Grid>
-        ))}
-        <Grid item xs={12}>
-          <Button onClick={addFlight}>Add Flight</Button>
         </Grid>
-      </Grid>
       </Box>
     </Container>
   );
