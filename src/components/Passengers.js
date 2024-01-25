@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import Counter from "./Counter";
 import Modal from "@mui/material/Modal";
 import CabinSelect from "./CabinSelect";
+import Grid from "@mui/material/Unstable_Grid2";
 
 const style = {
   position: "absolute",
@@ -17,16 +18,28 @@ const style = {
   p: 4,
 };
 
-export default function Passengers( {cabinClass, changeCabinClass}) {
+export default function Passengers({
+  cabinClass,
+  changeCabinClass,
+  numAdults,
+  numTeens,
+  numChildren,
+  numInfants,
+  setNumAdults,
+  setNumTeens,
+  setNumChildren,
+  setNumInfants,
+}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleOpen}>
-        {" "}
-        All Passengers
+      <Button variant="contained" onClick={handleOpen}>
+        {`All Passengers (${
+          numAdults + numTeens + numChildren + numInfants
+        } total)`}
       </Button>
       <Modal
         open={open}
@@ -35,7 +48,42 @@ export default function Passengers( {cabinClass, changeCabinClass}) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <CabinSelect cabinClass={cabinClass} onChange={changeCabinClass}/>
+          <Grid container rowSpacing={2}>
+            <Grid xs={12}>
+              <CabinSelect
+                cabinClass={cabinClass}
+                onChange={changeCabinClass}
+              />
+            </Grid>
+            <Grid xs={12}>
+              <Counter
+                count={numAdults}
+                setCount={setNumAdults}
+                minCount={1}
+                title={"Adults (age 18+)"}
+              />
+              <Counter
+                count={numTeens}
+                setCount={setNumTeens}
+                title={"Teens (age 12+)"}
+              />
+              <Counter
+                count={numChildren}
+                setCount={setNumChildren}
+                title={"Children (age 2+)"}
+              />
+              <Counter
+                count={numInfants}
+                setCount={setNumInfants}
+                title={"Infants"}
+              />
+            </Grid>
+            <Grid xs={12}>
+              <Button variant="contained" onClick={handleClose}>
+                Done
+              </Button>
+            </Grid>
+          </Grid>
         </Box>
       </Modal>
     </div>

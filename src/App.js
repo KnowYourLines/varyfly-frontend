@@ -17,6 +17,10 @@ export default function App() {
     { from: null, to: null, date: null, id: uuidv4() },
   ]);
   const [cabinClass, setCabinClass] = useState("economy");
+  const [numAdults, setNumAdults] = useState(1);
+  const [numTeens, setNumTeens] = useState(0);
+  const [numChildren, setNumChildren] = useState(0);
+  const [numInfants, setNumInfants] = useState(0);
   const addFlight = () => {
     setFlightLegs([
       ...flightLegs,
@@ -70,6 +74,14 @@ export default function App() {
               <Passengers
                 cabinClass={cabinClass}
                 changeCabinClass={changeCabinClass}
+                numAdults={numAdults}
+                numTeens={numTeens}
+                numChildren={numChildren}
+                numInfants={numInfants}
+                setNumAdults={setNumAdults}
+                setNumTeens={setNumTeens}
+                setNumChildren={setNumChildren}
+                setNumInfants={setNumInfants}
               />
             </Grid>
           </Grid>

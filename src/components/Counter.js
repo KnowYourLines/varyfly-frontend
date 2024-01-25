@@ -42,14 +42,13 @@ const StyledInput = styled(TextField)({
   },
 });
 
-export default function Counter() {
-  const [count, setCount] = useState(0);
+export default function Counter({ minCount = 0, title, count, setCount }) {
   const handleChange = (event) => {
     const newValue = event.target.value;
     if (
       Number.isInteger(Number(newValue)) &&
       newValue % 1 === 0 &&
-      newValue >= 0
+      newValue >= minCount
     ) {
       setCount(Number(newValue));
     }
@@ -58,13 +57,13 @@ export default function Counter() {
     <Container>
       <Grid container>
         <Grid xs={12}>
-          <Typography display="block">Adults (aged 18+)</Typography>
+          <Typography display="block">{title}</Typography>
         </Grid>
         <Grid xs={12}>
           <ButtonGroup>
             <StyledButton
               onClick={() => setCount((prev) => prev - 1)}
-              disabled={count === 0}
+              disabled={count === minCount}
             >
               <RemoveIcon fontSize="small" />
             </StyledButton>
