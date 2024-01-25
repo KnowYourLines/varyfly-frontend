@@ -43,6 +43,7 @@ export default function CitySearch({ inputLabel = "From", handleChange }) {
 
   return (
     <Autocomplete
+      noOptionsText={"Enter a city"}
       options={options}
       onInputChange={onInputChange}
       onChange={handleChange}
