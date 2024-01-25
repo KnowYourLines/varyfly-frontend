@@ -19,16 +19,18 @@ export default function FlightLeg({
   };
   return (
     <Box sx={{ width: "100%" }}>
-      <Grid container spacing={4}>
-        <Grid xs={6}>
+      <Grid container spacing={2}>
+        <Grid xs={4}>
           <CitySearch inputLabel="From" handleChange={changeFrom} />
         </Grid>
-        <Grid xs={6}>
+        <Grid xs={4}>
           <CitySearch inputLabel="To" handleChange={changeTo} />
-          {flightLegOrder > 1 && (
-            <Button onClick={() => onRemove(flightLegId)}>Remove</Button>
-          )}
         </Grid>
+        {flightLegOrder > 1 && (
+          <Grid xs={4}>
+            <Button onClick={() => onRemove(flightLegId)}>Remove</Button>
+          </Grid>
+        )}
       </Grid>
     </Box>
   );
