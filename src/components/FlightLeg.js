@@ -37,14 +37,13 @@ export default function FlightLeg({
             changeDate(newValue);
           }}
         />
-      </Grid>
-      {flightLegOrder > 1 && (
-        <Grid item alignItems="stretch" style={{ display: "flex" }}>
+        {flightLegOrder > 1 && (
           <Button variant="contained" onClick={() => onRemove(flightLegId)}>
             Remove
           </Button>
-        </Grid>
       )}
+      </Grid>
+      
     </Grid>
   );
 }
