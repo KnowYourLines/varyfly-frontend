@@ -31,6 +31,7 @@ export default function CitySearch({ inputLabel = "From", handleChange }) {
               cityName: city.city_name,
               countryIata: city.country_iata,
               countryName: city.country_name,
+              stateCode: city.state_code,
             };
           });
           setOptions(updatedOptions);
@@ -55,7 +56,11 @@ export default function CitySearch({ inputLabel = "From", handleChange }) {
       options={options}
       onInputChange={onInputChange}
       onChange={handleChange}
-      getOptionLabel={(city) => `${city.cityName}, ${city.countryName}`}
+      getOptionLabel={(city) =>
+        city.stateCode
+          ? `${city.cityName}, ${city.stateCode}, ${city.countryName}`
+          : `${city.cityName}, ${city.countryName}`
+      }
       isOptionEqualToValue={(option, value) =>
         option.cityIata === value.cityIata
       }
