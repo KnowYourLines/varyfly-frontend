@@ -8,7 +8,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { v4 as uuidv4 } from "uuid";
 
 import FlightLeg from "./components/FlightLeg";
-import CabinSelect from "./components/CabinSelect";
+import Passengers from "./components/Passengers";
 
 export default function App() {
   const maxNumFlightLegs = 16;
@@ -66,10 +66,10 @@ export default function App() {
                 </Button>
               </Grid>
             )}
-            <Grid xs={12}>
-              <CabinSelect
+            <Grid xs={2}>
+              <Passengers
                 cabinClass={cabinClass}
-                onChange={changeCabinClass}
+                changeCabinClass={changeCabinClass}
               />
             </Grid>
           </Grid>
