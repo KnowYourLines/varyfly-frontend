@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -8,7 +8,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { v4 as uuidv4 } from "uuid";
 
 import FlightLeg from "./components/FlightLeg";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import CabinSelect from "./components/CabinSelect";
 
 export default function App() {
   const maxNumFlightLegs = 16;
@@ -16,6 +16,7 @@ export default function App() {
     { from: null, to: null, date: null, id: uuidv4() },
     { from: null, to: null, date: null, id: uuidv4() },
   ]);
+  const [cabinClass, setCabinClass] = useState("economy");
   const addFlight = () => {
     setFlightLegs([
       ...flightLegs,
@@ -35,6 +36,9 @@ export default function App() {
         }
       })
     );
+  };
+  const changeCabinClass = (newCabinClass) => {
+    setCabinClass(newCabinClass);
   };
 
   return (
@@ -62,6 +66,12 @@ export default function App() {
                 </Button>
               </Grid>
             )}
+            <Grid xs={12}>
+              <CabinSelect
+                cabinClass={cabinClass}
+                onChange={changeCabinClass}
+              />
+            </Grid>
           </Grid>
         </Box>
       </Container>
