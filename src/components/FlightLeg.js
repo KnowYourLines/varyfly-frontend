@@ -23,14 +23,15 @@ export default function FlightLeg({
   };
   return (
     <Grid container spacing={2}>
-      <Grid item xs={3.5}>
+      <Grid item xs={4.75}>
         <CitySearch inputLabel="From" handleChange={changeFrom} />
       </Grid>
-      <Grid item xs={3.5}>
+      <Grid item xs={4.75}>
         <CitySearch inputLabel="To" handleChange={changeTo} />
       </Grid>
-      <Grid item xs={3.5}>
+      <Grid item alignItems="stretch" style={{ display: "flex" }}>
         <DatePicker
+          label="Depart on"
           value={date ? date : ""}
           onChange={(newValue) => {
             changeDate(newValue);
@@ -38,7 +39,7 @@ export default function FlightLeg({
         />
       </Grid>
       {flightLegOrder > 1 && (
-        <Grid item xs={1}>
+        <Grid item alignItems="stretch" style={{ display: "flex" }}>
           <Button variant="contained" onClick={() => onRemove(flightLegId)}>
             Remove
           </Button>
