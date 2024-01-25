@@ -37,7 +37,7 @@ export default function Passengers({
   return (
     <div>
       <Button variant="contained" onClick={handleOpen}>
-        {`All Passengers (${
+        {`Passengers (${
           numAdults + numTeens + numChildren + numInfants
         } total)`}
       </Button>
