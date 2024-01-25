@@ -13,13 +13,16 @@ export default function CitySearch({ inputLabel = "From", handleChange }) {
     const controller = new AbortController();
     const signal = controller.signal;
     previousController.current = controller;
-    fetch("http://localhost:8000/search-cities/?query=" + searchTerm, {
-      signal,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/search-cities/?query=` + searchTerm,
+      {
+        signal,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    )
       .then(function (response) {
         response.json().then((cities) => {
           const updatedOptions = cities.map((city) => {
