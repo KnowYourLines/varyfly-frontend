@@ -13,7 +13,7 @@ export default function CitySearch({ inputLabel = "From", handleChange }) {
     const controller = new AbortController();
     const signal = controller.signal;
     previousController.current = controller;
-    fetch("https://dummyjson.com/products/search?q=" + searchTerm, {
+    fetch("http://localhost:8000/search-cities/?query=" + searchTerm, {
       signal,
       headers: {
         "Content-Type": "application/json",
@@ -21,9 +21,14 @@ export default function CitySearch({ inputLabel = "From", handleChange }) {
       },
     })
       .then(function (response) {
-        response.json().then((myJson) => {
-          const updatedOptions = myJson.products.map((p) => {
-            return { title: p.title, price: p.price };
+        response.json().then((cities) => {
+          const updatedOptions = cities.map((city) => {
+            return {
+              cityIata: city.city_iata,
+              cityName: city.city_name,
+              countryIata: city.country_iata,
+              countryName: city.country_name,
+            };
           });
           setOptions(updatedOptions);
         });
@@ -47,8 +52,10 @@ export default function CitySearch({ inputLabel = "From", handleChange }) {
       options={options}
       onInputChange={onInputChange}
       onChange={handleChange}
-      getOptionLabel={(option) => `${option.title} at $${option.price}`}
-      isOptionEqualToValue={(option, value) => option.title === value.title}
+      getOptionLabel={(city) => `${city.cityName}, ${city.countryName}`}
+      isOptionEqualToValue={(option, value) =>
+        option.cityIata === value.cityIata
+      }
       style={{ width: "100%" }}
       renderInput={(params) => (
         <TextField {...params} label={inputLabel} variant="outlined" />

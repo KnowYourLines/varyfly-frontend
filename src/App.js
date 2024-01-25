@@ -34,7 +34,12 @@ export default function App() {
     setFlightLegs(
       flightLegs.map((flightLeg) => {
         if (flightLeg.id === flightLegId) {
-          return { ...flightLeg, from: from, to: to, date: date.toISOString() };
+          return {
+            ...flightLeg,
+            from: from,
+            to: to,
+            date: date ? date.toISOString() : date,
+          };
         } else {
           return flightLeg;
         }
