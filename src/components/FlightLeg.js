@@ -18,20 +18,18 @@ export default function FlightLeg({
     onChange(flightLegId, from, newValue);
   };
   return (
-    <Box sx={{ width: "100%" }}>
-      <Grid container spacing={2}>
-        <Grid xs={4}>
-          <CitySearch inputLabel="From" handleChange={changeFrom} />
-        </Grid>
-        <Grid xs={4}>
-          <CitySearch inputLabel="To" handleChange={changeTo} />
-        </Grid>
-        {flightLegOrder > 1 && (
-          <Grid xs={4}>
-            <Button onClick={() => onRemove(flightLegId)}>Remove</Button>
-          </Grid>
-        )}
+    <Grid container spacing={2}>
+      <Grid item xs={5.75}>
+        <CitySearch inputLabel="From" handleChange={changeFrom} />
       </Grid>
-    </Box>
+      <Grid item xs={5.75}>
+        <CitySearch inputLabel="To" handleChange={changeTo} />
+      </Grid>
+      {flightLegOrder > 1 && (
+        <Grid item xs={0.5}>
+          <Button onClick={() => onRemove(flightLegId)}>Remove</Button>
+        </Grid>
+      )}
+    </Grid>
   );
 }

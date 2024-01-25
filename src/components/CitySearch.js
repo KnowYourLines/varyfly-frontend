@@ -43,7 +43,6 @@ export default function CitySearch({ inputLabel = "From", handleChange }) {
 
   return (
     <Autocomplete
-      id="combo-box-demo"
       options={options}
       onInputChange={onInputChange}
       onChange={handleChange}
