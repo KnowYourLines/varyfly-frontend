@@ -19,14 +19,14 @@ export default function FlightLeg({
   };
   return (
     <Grid container spacing={2}>
-      <Grid item xs={5.75}>
+      <Grid item xs={5.5}>
         <CitySearch inputLabel="From" handleChange={changeFrom} />
       </Grid>
-      <Grid item xs={5.75}>
+      <Grid item xs={5.5}>
         <CitySearch inputLabel="To" handleChange={changeTo} />
       </Grid>
       {flightLegOrder > 1 && (
-        <Grid item xs={0.5}>
+        <Grid item xs={1}>
           <Button onClick={() => onRemove(flightLegId)}>Remove</Button>
         </Grid>
       )}
