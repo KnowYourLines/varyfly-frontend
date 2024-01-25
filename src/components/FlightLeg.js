@@ -41,9 +41,8 @@ export default function FlightLeg({
           <Button variant="contained" onClick={() => onRemove(flightLegId)}>
             Remove
           </Button>
-      )}
+        )}
       </Grid>
-      
     </Grid>
   );
 }
