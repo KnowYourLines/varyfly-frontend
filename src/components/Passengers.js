@@ -56,7 +56,7 @@ export default function Passengers({
                 count={numAdults}
                 setCount={setNumAdults}
                 minCount={1}
-                title={"Adults (age 12+, with at least one age 18+)"}
+                title={"Adults (age 12+, at least one age 18+)"}
               />
               <Counter
                 count={numChildren}
