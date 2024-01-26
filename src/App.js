@@ -66,7 +66,7 @@ export default function App() {
               flightTime: city.estimated_flight_time_hrs_mins,
             };
           });
-          setDirectDestinations(destinations)
+          setDirectDestinations(destinations);
         });
       })
       .catch(function (e) {
@@ -140,7 +140,10 @@ export default function App() {
               />
             </Grid>
             <Grid xs={12}>
-              <DirectDestinations destinations={directDestinations}/>
+              <DirectDestinations
+                destinations={directDestinations}
+                latestFlightLeg={latestFlightLeg}
+              />
             </Grid>
           </Grid>
         </Box>

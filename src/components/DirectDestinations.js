@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -20,6 +21,22 @@ export default function DirectDestinations({ destinations, latestFlightLeg }) {
   };
 
   function DataGridTitle() {
+    let title = "Direct Destinations";
+    if (latestFlightLeg) {
+      if (latestFlightLeg.to) {
+        title = `Direct Destinations from ${
+          latestFlightLeg.to.stateCode
+            ? `${latestFlightLeg.to.cityName}, ${latestFlightLeg.to.stateCode}, ${latestFlightLeg.to.countryName}`
+            : `${latestFlightLeg.to.cityName}, ${latestFlightLeg.to.countryName}`
+        }`;
+      } else if (latestFlightLeg.from) {
+        title = `Direct Destinations from ${
+          latestFlightLeg.from.stateCode
+            ? `${latestFlightLeg.from.cityName}, ${latestFlightLeg.from.stateCode}, ${latestFlightLeg.from.countryName}`
+            : `${latestFlightLeg.from.cityName}, ${latestFlightLeg.from.countryName}`
+        }`;
+      }
+    }
     return (
       <Box
         style={{
@@ -29,7 +46,7 @@ export default function DirectDestinations({ destinations, latestFlightLeg }) {
           alignItems: "center",
         }}
       >
-        <Typography variant="h5">Users</Typography>
+        <Typography variant="h5">{title}</Typography>
       </Box>
     );
   }
