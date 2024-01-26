@@ -42,6 +42,9 @@ export default function App() {
           latestFlightLeg.from.countryIata
         );
       }
+    } else {
+      setDirectDestinations([]);
+      setLatestFlightLeg({});
     }
   }, [flightLegs]);
   const updateDirectDestinations = (cityName, cityIata, countryIata) => {
