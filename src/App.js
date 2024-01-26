@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -20,6 +20,55 @@ export default function App() {
   const [numAdults, setNumAdults] = useState(1);
   const [numChildren, setNumChildren] = useState(0);
   const [numInfants, setNumInfants] = useState(0);
+  useEffect(() => {
+    const latestFlightLeg = [...flightLegs]
+      .reverse()
+      .find((flightLeg) => flightLeg.to || flightLeg.from);
+    if (latestFlightLeg) {
+      if (latestFlightLeg.to) {
+        updateDirectDestinations(
+          latestFlightLeg.to.cityName,
+          latestFlightLeg.to.cityIata,
+          latestFlightLeg.to.countryIata
+        );
+      } else {
+        updateDirectDestinations(
+          latestFlightLeg.from.cityName,
+          latestFlightLeg.from.cityIata,
+          latestFlightLeg.from.countryIata
+        );
+      }
+    }
+  }, [flightLegs]);
+  const updateDirectDestinations = (cityName, cityIata, countryIata) => {
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/direct-destinations/?city_name=${cityName}&city_iata=${cityIata}&country_iata=${countryIata}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    )
+      .then(function (response) {
+        response.json().then((cities) => {
+          const destinations = cities.map((city) => {
+            return {
+              cityIata: city.iataCode,
+              cityName: city.name,
+              countryIata: city.address.countryCode,
+              country: city.country,
+              state: city.state,
+              flightTime: city.estimated_flight_time_hrs_mins,
+            };
+          });
+          console.log(destinations);
+        });
+      })
+      .catch(function (e) {
+        console.log(e.message);
+      });
+  };
   const addFlight = () => {
     setFlightLegs([
       ...flightLegs,
