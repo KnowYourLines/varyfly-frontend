@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -21,7 +20,7 @@ export default function DirectDestinations({ destinations, latestFlightLeg }) {
   };
 
   function DataGridTitle() {
-    let title = "Direct Destinations from last origin or destination";
+    let title = "Direct Destinations from last destination or origin";
     if (latestFlightLeg) {
       if (latestFlightLeg.to) {
         title = `Direct Destinations from ${

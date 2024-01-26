@@ -23,11 +23,11 @@ export default function FlightLeg({
   };
   return (
     <Grid container spacing={2}>
-      <Grid xs={4.75}>
-        <CitySearch inputLabel="From" handleChange={changeFrom} />
+      <Grid xs={3}>
+        <CitySearch inputLabel="Origin" handleChange={changeFrom} />
       </Grid>
-      <Grid xs={4.75}>
-        <CitySearch inputLabel="To" handleChange={changeTo} />
+      <Grid xs={3}>
+        <CitySearch inputLabel="Destination" handleChange={changeTo} />
       </Grid>
       <Grid alignItems="stretch" style={{ display: "flex" }}>
         <DatePicker
