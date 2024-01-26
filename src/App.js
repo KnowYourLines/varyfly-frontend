@@ -21,11 +21,14 @@ export default function App() {
   const [numAdults, setNumAdults] = useState(1);
   const [numChildren, setNumChildren] = useState(0);
   const [numInfants, setNumInfants] = useState(0);
+  const [latestFlightLeg, setLatestFlightLeg] = useState({});
+  const [directDestinations, setDirectDestinations] = useState([]);
   useEffect(() => {
     const latestFlightLeg = [...flightLegs]
       .reverse()
       .find((flightLeg) => flightLeg.to || flightLeg.from);
     if (latestFlightLeg) {
+      setLatestFlightLeg(latestFlightLeg);
       if (latestFlightLeg.to) {
         updateDirectDestinations(
           latestFlightLeg.to.cityName,
@@ -63,7 +66,7 @@ export default function App() {
               flightTime: city.estimated_flight_time_hrs_mins,
             };
           });
-          console.log(destinations);
+          setDirectDestinations(destinations)
         });
       })
       .catch(function (e) {
@@ -137,7 +140,7 @@ export default function App() {
               />
             </Grid>
             <Grid xs={12}>
-              <DirectDestinations />
+              <DirectDestinations destinations={directDestinations}/>
             </Grid>
           </Grid>
         </Box>

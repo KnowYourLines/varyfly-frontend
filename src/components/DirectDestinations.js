@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { DataGrid } from "@mui/x-data-grid";
 
-export default function DirectDestinations() {
+export default function DirectDestinations({ destinations, latestFlightLeg }) {
   const renderSelectButton = (params) => {
     return (
       <Button
@@ -12,7 +12,6 @@ export default function DirectDestinations() {
         size="small"
         onClick={() => {
           console.log(params.row);
-          console.log("hello world");
         }}
       >
         Select
@@ -41,23 +40,16 @@ export default function DirectDestinations() {
       sortable: false,
       renderCell: renderSelectButton,
     },
-    { field: "id", headerName: "ID" },
-    { field: "firstName", headerName: "First name" },
-    { field: "lastName", headerName: "Last name" },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-    },
+    { field: "cityName", headerName: "City", width: 205 },
+    { field: "state", headerName: "State", width: 205 },
+    { field: "country", headerName: "Country", width: 205 },
+    { field: "flightTime", headerName: "Estimated Flight Time", width: 205 },
   ];
 
-  const rows = [
-    { id: 1, lastName: "26h 5m", firstName: "Jon", age: 35 },
-    { id: 2, lastName: "36h 9m", firstName: "Cersei", age: 42 },
-  ];
   return (
     <DataGrid
-      rows={rows}
+      rows={destinations}
+      getRowId={(destination) => destination.cityIata}
       columns={columns}
       slots={{
         toolbar: DataGridTitle,
