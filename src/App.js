@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import FlightLeg from "./components/FlightLeg";
 import Passengers from "./components/Passengers";
+import DirectDestinations from "./components/DirectDestinations";
 
 export default function App() {
   const maxNumFlightLegs = 16;
@@ -134,6 +135,9 @@ export default function App() {
                 setNumChildren={setNumChildren}
                 setNumInfants={setNumInfants}
               />
+            </Grid>
+            <Grid xs={12}>
+              <DirectDestinations />
             </Grid>
           </Grid>
         </Box>
