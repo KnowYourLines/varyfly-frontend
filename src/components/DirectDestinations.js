@@ -21,7 +21,7 @@ export default function DirectDestinations({ destinations, latestFlightLeg }) {
   };
 
   function DataGridTitle() {
-    let title = "Direct Destinations";
+    let title = "Direct Destinations from last origin or destination";
     if (latestFlightLeg) {
       if (latestFlightLeg.to) {
         title = `Direct Destinations from ${
