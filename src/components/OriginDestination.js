@@ -3,7 +3,6 @@ import Grid from "@mui/material/Unstable_Grid2";
 
 export default function OriginDestination({ updateOrigin, updateDestination }) {
   const changeOrigin = (event, newValue) => {
-    console.log(newValue);
     if (newValue) {
       updateOrigin(newValue);
     } else {

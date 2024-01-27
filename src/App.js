@@ -10,39 +10,69 @@ export default function App() {
   const [destination, setDestination] = useState({});
   const [directDestinations, setDirectDestinations] = useState([]);
   useEffect(() => {
-    if (Object.keys(origin).length > 0 || Object.keys(destination).length > 0) {
-      // updateDirectDestinations(origin, destination);
-    } else {
-      setDirectDestinations([]);
-      setOrigin({});
-      setDestination({});
+    async function updateDirectDestinations() {
+      if (
+        Object.keys(origin).length > 0 &&
+        Object.keys(destination).length > 0
+      ) {
+        const originDirectDestinations = await getDirectDestinations(origin);
+        const destinationDirectDestinations = await getDirectDestinations(
+          destination
+        );
+        const commonDirectDestinations = originDirectDestinations.filter(
+          (originDirectDestination) =>
+            destinationDirectDestinations.some(
+              (destinationDirectDestination) =>
+                originDirectDestination.cityIata ==
+                destinationDirectDestination.cityIata
+            )
+        );
+        setDirectDestinations(commonDirectDestinations);
+      } else if (
+        Object.keys(origin).length > 0 &&
+        !Object.keys(destination).length > 0
+      ) {
+        const originDirectDestinations = await getDirectDestinations(origin);
+        setDirectDestinations(originDirectDestinations);
+      } else if (
+        !Object.keys(origin).length > 0 &&
+        Object.keys(destination).length > 0
+      ) {
+        const destinationDirectDestinations = await getDirectDestinations(
+          destination
+        );
+        setDirectDestinations(destinationDirectDestinations);
+      } else {
+        setDirectDestinations([]);
+      }
     }
+    updateDirectDestinations();
   }, [origin, destination]);
-  const updateDirectDestinations = () => {
-    fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/direct-destinations/?origin_city_name=${origin.cityName}&origin_city_iata=${origin.cityIata}&origin_country_iata=${origin.countryIata}`,
+  const getDirectDestinations = async (start) => {
+    return fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/direct-destinations/?city_name=${start.cityName}&city_iata=${start.cityIata}&country_iata=${start.countryIata}`,
       {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
       }
     )
-      .then(function (response) {
-        response.json().then((cities) => {
-          const destinations = cities.map((city) => {
-            return {
-              cityIata: city.iataCode,
-              cityName: city.name,
-              countryIata: city.address.countryCode,
-              country: city.country,
-              state: city.state,
-              flightTime: city.estimated_flight_time_hrs_mins,
-              flightTimeNum: city.estimated_flight_time_hrs,
-            };
-          });
-          setDirectDestinations(destinations);
+      .then((response) => response.json())
+      .then((cities) => {
+        const destinations = cities.map((city) => {
+          return {
+            cityIata: city.iataCode,
+            cityName: city.name,
+            countryIata: city.address.countryCode,
+            country: city.country,
+            state: city.state,
+            flightTime: city.estimated_flight_time_hrs_mins,
+            flightTimeNum: city.estimated_flight_time_hrs,
+          };
         });
+        return destinations;
       })
       .catch(function (e) {
         console.log(e.message);
