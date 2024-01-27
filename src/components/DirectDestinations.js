@@ -55,6 +55,7 @@ export default function DirectDestinations({ destinations, latestFlightLeg }) {
       headerName: "",
       sortable: false,
       renderCell: renderSelectButton,
+      disableColumnMenu: true,
     },
     {
       field: "flightTime",
@@ -66,10 +67,26 @@ export default function DirectDestinations({ destinations, latestFlightLeg }) {
       renderCell: (params) => {
         return params.row.flightTime;
       },
+      disableColumnMenu: true,
     },
-    { field: "cityName", headerName: "City", width: 205 },
-    { field: "state", headerName: "State", width: 120 },
-    { field: "country", headerName: "Country", width: 205 },
+    {
+      field: "cityName",
+      headerName: "City",
+      width: 205,
+      disableColumnMenu: true,
+    },
+    {
+      field: "state",
+      headerName: "State",
+      width: 120,
+      disableColumnMenu: true,
+    },
+    {
+      field: "country",
+      headerName: "Country",
+      width: 205,
+      disableColumnMenu: true,
+    },
   ];
 
   return (
