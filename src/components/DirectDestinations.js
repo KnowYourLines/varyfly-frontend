@@ -12,12 +12,12 @@ export default function DirectDestinations({
     if (Object.keys(origin).length > 0 && Object.keys(destination).length > 0) {
       title = `Common direct flights from ${
         origin.stateCode
-          ? `${origin.cityName}, ${origin.stateCode}, ${origin.countryName}`
-          : `${origin.cityName}, ${origin.countryName}`
+          ? `${origin.cityName}, ${origin.stateCode}`
+          : `${origin.cityName}`
       } and ${
         destination.stateCode
-          ? `${destination.cityName}, ${destination.stateCode}, ${destination.countryName}`
-          : `${destination.cityName}, ${destination.countryName}`
+          ? `${destination.cityName}, ${destination.stateCode}`
+          : `${destination.cityName}`
       }`;
     } else if (
       Object.keys(origin).length > 0 &&
@@ -25,8 +25,8 @@ export default function DirectDestinations({
     ) {
       title = `Direct flights from ${
         origin.stateCode
-          ? `${origin.cityName}, ${origin.stateCode}, ${origin.countryName}`
-          : `${origin.cityName}, ${origin.countryName}`
+          ? `${origin.cityName}, ${origin.stateCode}`
+          : `${origin.cityName}`
       }`;
     } else if (
       !Object.keys(origin).length > 0 &&
@@ -34,8 +34,8 @@ export default function DirectDestinations({
     ) {
       title = `Direct flights from ${
         destination.stateCode
-          ? `${destination.cityName}, ${destination.stateCode}, ${destination.countryName}`
-          : `${destination.cityName}, ${destination.countryName}`
+          ? `${destination.cityName}, ${destination.stateCode}`
+          : `${destination.cityName}`
       }`;
     }
 
