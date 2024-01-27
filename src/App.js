@@ -67,6 +67,7 @@ export default function App() {
               country: city.country,
               state: city.state,
               flightTime: city.estimated_flight_time_hrs_mins,
+              flightTimeNum: city.estimated_flight_time_hrs,
             };
           });
           setDirectDestinations(destinations);

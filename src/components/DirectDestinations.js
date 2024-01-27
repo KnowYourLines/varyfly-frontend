@@ -56,10 +56,20 @@ export default function DirectDestinations({ destinations, latestFlightLeg }) {
       sortable: false,
       renderCell: renderSelectButton,
     },
+    {
+      field: "flightTime",
+      headerName: "Estimated Flight Time",
+      width: 205,
+      valueGetter: (params) => {
+        return params.row.flightTimeNum;
+      },
+      renderCell: (params) => {
+        return params.row.flightTime;
+      },
+    },
     { field: "cityName", headerName: "City", width: 205 },
-    { field: "state", headerName: "State", width: 205 },
+    { field: "state", headerName: "State", width: 120 },
     { field: "country", headerName: "Country", width: 205 },
-    { field: "flightTime", headerName: "Estimated Flight Time", width: 205 },
   ];
 
   return (
