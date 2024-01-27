@@ -8,9 +8,9 @@ export default function DirectDestinations({
   destination,
 }) {
   function DataGridTitle() {
-    let title = "Direct flights";
+    let title = "Direct destinations";
     if (Object.keys(origin).length > 0 && Object.keys(destination).length > 0) {
-      title = `Common direct flights from ${
+      title = `Common direct destinations from ${
         origin.stateCode
           ? `${origin.cityName}, ${origin.stateCode}`
           : `${origin.cityName}`
@@ -23,7 +23,7 @@ export default function DirectDestinations({
       Object.keys(origin).length > 0 &&
       !Object.keys(destination).length > 0
     ) {
-      title = `Direct flights from ${
+      title = `Direct destinations from ${
         origin.stateCode
           ? `${origin.cityName}, ${origin.stateCode}`
           : `${origin.cityName}`
@@ -32,7 +32,7 @@ export default function DirectDestinations({
       !Object.keys(origin).length > 0 &&
       Object.keys(destination).length > 0
     ) {
-      title = `Direct flights from ${
+      title = `Direct destinations from ${
         destination.stateCode
           ? `${destination.cityName}, ${destination.stateCode}`
           : `${destination.cityName}`
