@@ -1,41 +1,44 @@
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { DataGrid } from "@mui/x-data-grid";
 
-export default function DirectDestinations({ destinations, latestFlightLeg }) {
-  const renderSelectButton = (params) => {
-    return (
-      <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        onClick={() => {
-          console.log(params.row);
-        }}
-      >
-        Select
-      </Button>
-    );
-  };
-
+export default function DirectDestinations({
+  destinations,
+  origin,
+  destination,
+}) {
   function DataGridTitle() {
-    let title = "Direct Destinations from last destination or origin";
-    if (latestFlightLeg) {
-      if (latestFlightLeg.to) {
-        title = `Direct Destinations from ${
-          latestFlightLeg.to.stateCode
-            ? `${latestFlightLeg.to.cityName}, ${latestFlightLeg.to.stateCode}, ${latestFlightLeg.to.countryName}`
-            : `${latestFlightLeg.to.cityName}, ${latestFlightLeg.to.countryName}`
-        }`;
-      } else if (latestFlightLeg.from) {
-        title = `Direct Destinations from ${
-          latestFlightLeg.from.stateCode
-            ? `${latestFlightLeg.from.cityName}, ${latestFlightLeg.from.stateCode}, ${latestFlightLeg.from.countryName}`
-            : `${latestFlightLeg.from.cityName}, ${latestFlightLeg.from.countryName}`
-        }`;
-      }
+    let title = "Direct flights";
+    if (Object.keys(origin).length > 0 && Object.keys(destination).length > 0) {
+      title = `Common direct flights from ${
+        origin.stateCode
+          ? `${origin.cityName}, ${origin.stateCode}, ${origin.countryName}`
+          : `${origin.cityName}, ${origin.countryName}`
+      } and ${
+        destination.stateCode
+          ? `${destination.cityName}, ${destination.stateCode}, ${destination.countryName}`
+          : `${destination.cityName}, ${destination.countryName}`
+      }`;
+    } else if (
+      Object.keys(origin).length > 0 &&
+      !Object.keys(destination).length > 0
+    ) {
+      title = `Direct flights from ${
+        origin.stateCode
+          ? `${origin.cityName}, ${origin.stateCode}, ${origin.countryName}`
+          : `${origin.cityName}, ${origin.countryName}`
+      }`;
+    } else if (
+      !Object.keys(origin).length > 0 &&
+      Object.keys(destination).length > 0
+    ) {
+      title = `Direct flights from ${
+        destination.stateCode
+          ? `${destination.cityName}, ${destination.stateCode}, ${destination.countryName}`
+          : `${destination.cityName}, ${destination.countryName}`
+      }`;
     }
+
     return (
       <Box
         style={{
@@ -50,13 +53,6 @@ export default function DirectDestinations({ destinations, latestFlightLeg }) {
     );
   }
   const columns = [
-    {
-      field: "select",
-      headerName: "",
-      sortable: false,
-      renderCell: renderSelectButton,
-      disableColumnMenu: true,
-    },
     {
       field: "flightTime",
       headerName: "Estimated Flight Time",
