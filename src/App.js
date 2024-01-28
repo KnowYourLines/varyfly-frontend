@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -9,6 +9,7 @@ export default function App() {
   const [origin, setOrigin] = useState({});
   const [destination, setDestination] = useState({});
   const [directDestinations, setDirectDestinations] = useState([]);
+  const previousController = useRef();
   useEffect(() => {
     if (Object.keys(origin).length > 0 || Object.keys(destination).length > 0) {
       getDirectDestinations();
@@ -17,9 +18,16 @@ export default function App() {
     }
   }, [origin, destination]);
   const getDirectDestinations = () => {
+    if (previousController.current) {
+      previousController.current.abort();
+    }
+    const controller = new AbortController();
+    const signal = controller.signal;
+    previousController.current = controller;
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/direct-destinations/?origin_city_name=${origin.cityName}&origin_city_iata=${origin.cityIata}&origin_country_iata=${origin.countryIata}&destination_city_name=${destination.cityName}&destination_city_iata=${destination.cityIata}&destination_country_iata=${destination.countryIata}`,
       {
+        signal: signal,
         method: "GET",
         headers: {
           "Content-Type": "application/json",
