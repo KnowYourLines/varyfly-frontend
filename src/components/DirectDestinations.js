@@ -8,7 +8,7 @@ export default function DirectDestinations({
   destination,
 }) {
   function DataGridTitle() {
-    let title = "Direct destinations";
+    let title = "Direct destinations from origin/destination";
     if (Object.keys(origin).length > 0 && Object.keys(destination).length > 0) {
       title = `Common direct destinations from ${
         origin.stateCode
