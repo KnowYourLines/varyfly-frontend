@@ -43,7 +43,7 @@ export default function CitySearch({ inputLabel = "From", handleChange }) {
   };
 
   const onInputChange = (event, value, reason) => {
-    if (value) {
+    if (value && reason === "input") {
       getData(value);
     } else {
       setOptions([]);

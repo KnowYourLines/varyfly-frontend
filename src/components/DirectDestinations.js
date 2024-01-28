@@ -52,16 +52,17 @@ export default function DirectDestinations({
       </Box>
     );
   }
-  const columns = [
+
+  const originOnlyColumns = [
     {
       field: "flightTime",
       headerName: "Estimated Flight Time",
       width: 205,
       valueGetter: (params) => {
-        return params.row.flightTimeNum;
+        return params.row.originFlightTimeNum;
       },
       renderCell: (params) => {
-        return params.row.flightTime;
+        return params.row.originFlightTime;
       },
       disableColumnMenu: true,
     },
@@ -84,12 +85,97 @@ export default function DirectDestinations({
       disableColumnMenu: true,
     },
   ];
-
+  const destinationOnlyColumns = [
+    {
+      field: "flightTime",
+      headerName: "Estimated Flight Time",
+      width: 205,
+      valueGetter: (params) => {
+        return params.row.destinationFlightTimeNum;
+      },
+      renderCell: (params) => {
+        return params.row.destinationFlightTime;
+      },
+      disableColumnMenu: true,
+    },
+    {
+      field: "cityName",
+      headerName: "City",
+      width: 205,
+      disableColumnMenu: true,
+    },
+    {
+      field: "state",
+      headerName: "State",
+      width: 120,
+      disableColumnMenu: true,
+    },
+    {
+      field: "country",
+      headerName: "Country",
+      width: 205,
+      disableColumnMenu: true,
+    },
+  ];
+  const combinedColumns = [
+    {
+      field: "originFlightTime",
+      headerName: "Flight Time from Origin",
+      width: 250,
+      valueGetter: (params) => {
+        return params.row.originFlightTimeNum;
+      },
+      renderCell: (params) => {
+        return params.row.originFlightTime;
+      },
+      disableColumnMenu: true,
+    },
+    {
+      field: "destinationFlightTime",
+      headerName: "Flight Time from Destination",
+      width: 250,
+      valueGetter: (params) => {
+        return params.row.destinationFlightTimeNum;
+      },
+      renderCell: (params) => {
+        return params.row.destinationFlightTime;
+      },
+      disableColumnMenu: true,
+    },
+    {
+      field: "cityName",
+      headerName: "City",
+      width: 205,
+      disableColumnMenu: true,
+    },
+    {
+      field: "state",
+      headerName: "State",
+      width: 120,
+      disableColumnMenu: true,
+    },
+    {
+      field: "country",
+      headerName: "Country",
+      width: 205,
+      disableColumnMenu: true,
+    },
+  ];
   return (
     <DataGrid
       rows={destinations}
       getRowId={(destination) => destination.cityIata}
-      columns={columns}
+      columns={
+        Object.keys(origin).length > 0 && Object.keys(destination).length > 0
+          ? combinedColumns
+          : !Object.keys(origin).length > 0 &&
+            Object.keys(destination).length > 0
+          ? destinationOnlyColumns
+          : Object.keys(origin).length > 0 &&
+            !Object.keys(destination).length > 0
+          ? originOnlyColumns
+          : []
+      }
       slots={{
         toolbar: DataGridTitle,
       }}
