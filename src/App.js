@@ -55,6 +55,30 @@ export default function App() {
       });
   };
 
+  const findFlights = () => {
+    if (previousController.current) {
+      previousController.current.abort();
+    }
+    const controller = new AbortController();
+    const signal = controller.signal;
+    previousController.current = controller;
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/booking/`, {
+      signal: signal,
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((payload) => {
+        window.open(payload.url, "_self");
+      })
+      .catch(function (e) {
+        console.log(e.message);
+      });
+  };
+
   return (
     <Container maxWidth="100%">
       <Box sx={{ my: "1%" }}>
@@ -72,7 +96,7 @@ export default function App() {
             <Button
               variant="contained"
               onClick={() => {
-                alert("clicked");
+                findFlights();
               }}
             >
               Find Flights
