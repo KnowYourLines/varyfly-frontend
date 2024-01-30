@@ -3,20 +3,19 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import DirectDestinations from "./components/DirectDestinations";
-import OriginDestination from "./components/OriginDestination";
+import Origin from "./components/Origin";
 
 export default function App() {
   const [origin, setOrigin] = useState({});
-  const [destination, setDestination] = useState({});
   const [directDestinations, setDirectDestinations] = useState([]);
   const previousController = useRef();
   useEffect(() => {
-    if (Object.keys(origin).length > 0 || Object.keys(destination).length > 0) {
+    if (Object.keys(origin).length > 0) {
       getDirectDestinations();
     } else {
       setDirectDestinations([]);
     }
-  }, [origin, destination]);
+  }, [origin]);
   const getDirectDestinations = () => {
     if (previousController.current) {
       previousController.current.abort();
@@ -25,7 +24,7 @@ export default function App() {
     const signal = controller.signal;
     previousController.current = controller;
     fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/direct-destinations/?origin_city_name=${origin.cityName}&origin_city_iata=${origin.cityIata}&origin_country_iata=${origin.countryIata}&destination_city_name=${destination.cityName}&destination_city_iata=${destination.cityIata}&destination_country_iata=${destination.countryIata}`,
+      `${process.env.REACT_APP_BACKEND_URL}/direct-destinations/?city_name=${origin.cityName}&city_iata=${origin.cityIata}&country_iata=${origin.countryIata}`,
       {
         signal: signal,
         method: "GET",
@@ -44,12 +43,8 @@ export default function App() {
             countryIata: city.address.countryCode,
             country: city.country,
             state: city.state,
-            originFlightTime: city.origin_estimated_flight_time_hrs_mins,
-            originFlightTimeNum: city.origin_estimated_flight_time_hrs,
-            destinationFlightTime:
-              city.destination_estimated_flight_time_hrs_mins,
-            destinationFlightTimeNum:
-              city.destination_estimated_flight_time_hrs,
+            flightTime: city.estimated_flight_time_hrs_mins,
+            flightTimeNum: city.estimated_flight_time_hrs,
           };
         });
         setDirectDestinations(destinations);
@@ -64,16 +59,12 @@ export default function App() {
       <Box sx={{ my: "1%" }}>
         <Grid container rowSpacing={2}>
           <Grid xs={12}>
-            <OriginDestination
-              updateOrigin={setOrigin}
-              updateDestination={setDestination}
-            />
+            <Origin updateOrigin={setOrigin} />
           </Grid>
           <Grid xs={12}>
             <DirectDestinations
               destinations={directDestinations}
               origin={origin}
-              destination={destination}
             />
           </Grid>
         </Grid>
