@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
+import Button from "@mui/material/Button";
 import DirectDestinations from "./components/DirectDestinations";
 import Origin from "./components/Origin";
 
@@ -57,7 +58,7 @@ export default function App() {
   return (
     <Container maxWidth="100%">
       <Box sx={{ my: "1%" }}>
-        <Grid container rowSpacing={2}>
+        <Grid container rowSpacing={2} align="center">
           <Grid xs={12}>
             <Origin updateOrigin={setOrigin} />
           </Grid>
@@ -66,6 +67,16 @@ export default function App() {
               destinations={directDestinations}
               origin={origin}
             />
+          </Grid>
+          <Grid xs={12}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                alert("clicked");
+              }}
+            >
+              Find Flights
+            </Button>
           </Grid>
         </Grid>
       </Box>
