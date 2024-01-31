@@ -18,7 +18,7 @@ export default function Origin({ updateOrigin }) {
       justifyContent="center"
     >
       <Grid xs={6}>
-        <CitySearch inputLabel="Origin" handleChange={changeOrigin} />
+        <CitySearch inputLabel="City" handleChange={changeOrigin} />
       </Grid>
     </Grid>
   );

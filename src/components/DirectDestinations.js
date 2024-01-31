@@ -2,8 +2,17 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { DataGrid } from "@mui/x-data-grid";
 
-export default function DirectDestinations({ destinations }) {
+export default function DirectDestinations({ destinations, origin }) {
   function DataGridTitle() {
+    const defaultTitle = "Direct Flights To/From City";
+    const title =
+      Object.keys(origin).length > 0
+        ? `${defaultTitle} ${
+            origin.stateCode
+              ? `${origin.cityName}, ${origin.stateCode}`
+              : `${origin.cityName}`
+          }`
+        : `${defaultTitle}`;
     return (
       <Box
         style={{
@@ -13,7 +22,7 @@ export default function DirectDestinations({ destinations }) {
           alignItems: "center",
         }}
       >
-        <Typography variant="h5">{"Direct Flight Destinations"}</Typography>
+        <Typography variant="h5">{title}</Typography>
       </Box>
     );
   }
