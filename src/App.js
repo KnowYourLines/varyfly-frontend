@@ -99,7 +99,7 @@ export default function App() {
                 findFlights();
               }}
             >
-              Find Flights
+              Book Flights
             </Button>
           </Grid>
         </Grid>
