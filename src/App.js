@@ -72,7 +72,7 @@ export default function App() {
     })
       .then((response) => response.json())
       .then((payload) => {
-        window.open(payload.url, "_blank");
+        window.open(payload.url, "_self");
       })
       .catch(function (e) {
         console.log(e.message);
