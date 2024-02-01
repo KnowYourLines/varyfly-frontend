@@ -4,7 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 
 export default function DirectDestinations({ destinations, origin }) {
   function DataGridTitle() {
-    const defaultTitle = "Direct Flights To/From City";
+    const defaultTitle = "Direct Flights To/From";
     const title =
       Object.keys(origin).length > 0
         ? `${defaultTitle} ${
@@ -12,7 +12,7 @@ export default function DirectDestinations({ destinations, origin }) {
               ? `${origin.cityName}, ${origin.stateCode}`
               : `${origin.cityName}`
           }`
-        : `${defaultTitle}`;
+        : `${defaultTitle} City`;
     return (
       <Box
         style={{
