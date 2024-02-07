@@ -68,10 +68,10 @@ export default function DirectDestinations({ destinations, origin }) {
       }}
       initialState={{
         pagination: {
-          paginationModel: { page: 0, pageSize: 10 },
+          paginationModel: { page: 0, pageSize: 8 },
         },
       }}
-      pageSizeOptions={[5, 10]}
+      pageSizeOptions={[8, 12]}
     />
   );
 }
