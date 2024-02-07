@@ -31,7 +31,7 @@ export default function DirectDestinations({ destinations, origin }) {
     {
       field: "flightTime",
       headerName: "Flight Time",
-      width: 205,
+      width: 120,
       valueGetter: (params) => {
         return params.row.flightTimeNum;
       },
@@ -43,7 +43,7 @@ export default function DirectDestinations({ destinations, origin }) {
     {
       field: "cityName",
       headerName: "City",
-      width: 205,
+      width: 185,
       disableColumnMenu: true,
       renderCell: (params) => {
         return params.row.state
@@ -54,7 +54,7 @@ export default function DirectDestinations({ destinations, origin }) {
     {
       field: "country",
       headerName: "Country",
-      width: 205,
+      width: 185,
       disableColumnMenu: true,
     },
   ];
