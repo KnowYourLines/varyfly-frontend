@@ -31,7 +31,7 @@ export default function DirectDestinations({ destinations, origin }) {
     {
       field: "flightTime",
       headerName: "Flight Time",
-      width: 120,
+      width: 125,
       valueGetter: (params) => {
         return params.row.flightTimeNum;
       },
