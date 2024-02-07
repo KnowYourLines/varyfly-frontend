@@ -30,7 +30,7 @@ export default function DirectDestinations({ destinations, origin }) {
   const columns = [
     {
       field: "flightTime",
-      headerName: "Estimated Flight Time",
+      headerName: "Flight Time",
       width: 205,
       valueGetter: (params) => {
         return params.row.flightTimeNum;
@@ -45,12 +45,11 @@ export default function DirectDestinations({ destinations, origin }) {
       headerName: "City",
       width: 205,
       disableColumnMenu: true,
-    },
-    {
-      field: "state",
-      headerName: "State",
-      width: 120,
-      disableColumnMenu: true,
+      renderCell: (params) => {
+        return params.row.state
+          ? `${params.row.cityName}, ${params.row.state}`
+          : `${params.row.cityName}`;
+      },
     },
     {
       field: "country",
@@ -69,7 +68,7 @@ export default function DirectDestinations({ destinations, origin }) {
       }}
       initialState={{
         pagination: {
-          paginationModel: { page: 0, pageSize: 5 },
+          paginationModel: { page: 0, pageSize: 10 },
         },
       }}
       pageSizeOptions={[5, 10]}
