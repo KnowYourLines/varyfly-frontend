@@ -56,6 +56,7 @@ export default function CitySearch({ inputLabel = "From", handleChange }) {
       options={options}
       onInputChange={onInputChange}
       onChange={handleChange}
+      filterOptions={(options) => options}
       getOptionLabel={(city) =>
         city.stateCode
           ? `${city.cityName}, ${city.stateCode}, ${city.countryName}`
